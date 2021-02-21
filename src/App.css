@@ -1,1 +1,24 @@
+nav {
+  display: flex;
+  background-color: rgb(192, 204, 207);
+}
 
+.nav-heading {
+  margin-left: 25px;
+}
+
+.nav-items {
+  margin-left: auto;
+  display: flex;
+}
+
+.nav-items .nav-input {
+  border-radius: 5px;
+  border: 0;
+  padding: 0 0 0 6px;
+}
+
+.nav-items .nav-btn {
+  margin-right: 50px;
+  margin-left: 15px;
+}
