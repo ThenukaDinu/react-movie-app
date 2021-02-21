@@ -58,19 +58,20 @@ export default function Movie({ match }) {
       <br />
       <br />
       <Grid container spacing={2} direction='row' justify='center'>
-        <Grid item xs={12} md={5}>
+        <Grid item s={12} md={4}>
           <Card>
             <CardMedia
               component='img'
               alt={singleMovie.Title}
               image={singleMovie.Poster}
               title={singleMovie.Title}
-              height='700'
+              max-height='900'
+              aspect-ratio={1}
             />
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item s={12} md={6}>
           <div>
             <h2>{singleMovie.Title}</h2>
             <div>Year: {singleMovie.Year}</div>
