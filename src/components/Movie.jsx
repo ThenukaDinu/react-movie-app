@@ -27,7 +27,7 @@ export default function Movie({ match }) {
     try {
       let res = await axios.get(`&i=${match.params.id}`);
       await setSingleMovie(res.data);
-      await setActors(res.data.Actors.split(","));
+      await setActors(res.data.Actors.split(','));
       await setLoading(false);
     } catch (error) {
       await setLoading(false);
@@ -54,7 +54,7 @@ export default function Movie({ match }) {
   }
 
   return (
-    <Container align='center' maxWidth="xl">
+    <Container align='center' maxWidth='xl'>
       <br />
       <br />
       <Grid container spacing={2} direction='row' justify='center'>
@@ -62,43 +62,38 @@ export default function Movie({ match }) {
           <Card>
             <CardMedia
               component='img'
-              alt='Contemplative Reptile'
+              alt={singleMovie.Title}
               image={singleMovie.Poster}
-              title='Contemplative Reptile'
+              title={singleMovie.Title}
               height='700'
             />
           </Card>
         </Grid>
 
         <Grid item xs={12} md={6}>
-        <div>
-                <h2>{ singleMovie.Title }</h2>
-                <div>Year: { singleMovie.Year }</div>
-                <div>Type: { singleMovie.Type }</div>
-                <div>IMDB: { singleMovie.imdbID }</div>
-                <div>IMDB Ratings: { singleMovie.imdbRating }</div>
-                <br />
-                <div>
-                  <h3>Actors</h3>
-                  {actors.map((actor, index) => {
-                    return (
-                      <p key={index}>
-                        {actor}
-                      </p>
-                    )
-                  })}
-
-                </div>
-                <div>
-                  <h3>Awards</h3>
-                  <p>{singleMovie.Awards}</p>
-                </div>
-                <br />
-                <div>Director: {singleMovie.Director}</div>
-                <div>Country: {singleMovie.Country}</div>
-                <div>Genre: {singleMovie.Genre}</div>
-                <div>Language: {singleMovie.Language}</div>
-              </div>
+          <div>
+            <h2>{singleMovie.Title}</h2>
+            <div>Year: {singleMovie.Year}</div>
+            <div>Type: {singleMovie.Type}</div>
+            <div>IMDB: {singleMovie.imdbID}</div>
+            <div>IMDB Ratings: {singleMovie.imdbRating}</div>
+            <br />
+            <div>
+              <h3>Actors</h3>
+              {actors.map((actor, index) => {
+                return <p key={index}>{actor}</p>;
+              })}
+            </div>
+            <div>
+              <h3>Awards</h3>
+              <p>{singleMovie.Awards}</p>
+            </div>
+            <br />
+            <div>Director: {singleMovie.Director}</div>
+            <div>Country: {singleMovie.Country}</div>
+            <div>Genre: {singleMovie.Genre}</div>
+            <div>Language: {singleMovie.Language}</div>
+          </div>
         </Grid>
       </Grid>
     </Container>

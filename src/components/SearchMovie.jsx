@@ -18,17 +18,7 @@ import { Link } from 'react-router-dom';
 export default function SearchMovie({ match }) {
   const [wholeResponse, setWholeResponse] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`&s=${match.params.name}`);
-      await setWholeResponse(response.data.Search);
-      await setLoading(false);
-    } catch (error) {
-      await setLoading(false);
-      await console.log(error);
-    }
-  };
+  const [noData, setNoData] = useState(true);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,6 +38,29 @@ export default function SearchMovie({ match }) {
 
   const classes = useStyles();
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`&s=${match.params.name}`);
+      if (response.data.Response === 'True') {
+        await setNoData(false);
+        await setWholeResponse(response.data.Search);
+        await setLoading(false);
+        return;
+      }
+      await setNoData(true);
+      await setLoading(false);
+    } catch (error) {
+      await setLoading(false);
+      await console.log(error);
+    }
+  };
+
+  const redirectToIMDB = (id) => {
+    window.open('https://www.imdb.com/title/' + id, '_blank');
+  };
+
+  useEffect(fetchData, [match.params.name, fetchData]);
+
   const renderMovies = () => {
     return wholeResponse.map((item, index) => {
       return (
@@ -56,9 +69,9 @@ export default function SearchMovie({ match }) {
             <CardActionArea className={classes.mousePointer}>
               <CardMedia
                 component='img'
-                alt='Contemplative Reptile'
+                alt={item.Title}
                 image={item.Poster}
-                title='Contemplative Reptile'
+                title={item.Title}
                 height='400'
               />
               <CardContent>
@@ -99,12 +112,6 @@ export default function SearchMovie({ match }) {
     });
   };
 
-  const redirectToIMDB = (id) => {
-    window.open('https://www.imdb.com/title/' + id, '_blank');
-  };
-
-  useEffect(() => fetchData(), [match.params.name, fetchData]);
-
   if (loading) {
     return (
       <div>
@@ -117,6 +124,8 @@ export default function SearchMovie({ match }) {
         />
       </div>
     );
+  } else if (noData) {
+    return <h3 style={{'textAlign': 'center'}}>No movie found with name {match.params.name}</h3>;
   }
 
   return (
