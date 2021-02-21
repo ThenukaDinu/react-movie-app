@@ -53,7 +53,7 @@ export default function LatestMovie(prop) {
   const renderMovies = () => {
     return wholeResponse.map((item, index) => {
       return (
-        <Grid item xs={12} sm={6} md={3} xl={2} key={index}>
+        <Grid item xs={12} sm={6} md={3} key={index}>
           <Card className={classes.root}>
             <CardActionArea className={classes.mousePointer}>
               <CardMedia
@@ -61,7 +61,7 @@ export default function LatestMovie(prop) {
                 alt='Contemplative Reptile'
                 image={item.Poster}
                 title='Contemplative Reptile'
-                height='300'
+                height='400'
               />
               <CardContent>
                 <Typography gutterBottom variant='h6' component='h6'>
@@ -119,7 +119,7 @@ export default function LatestMovie(prop) {
   }
 
   return (
-    <Container>
+    <Container maxWidth='xl'>
       <br/><br/>
       <Grid
         container

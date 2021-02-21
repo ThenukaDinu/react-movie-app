@@ -54,7 +54,7 @@ export default function Movie({ match }) {
   }
 
   return (
-    <Container align='center'>
+    <Container align='center' maxWidth="xl">
       <br />
       <br />
       <Grid container spacing={2} direction='row' justify='center'>
@@ -65,7 +65,7 @@ export default function Movie({ match }) {
               alt='Contemplative Reptile'
               image={singleMovie.Poster}
               title='Contemplative Reptile'
-              height='550'
+              height='700'
             />
           </Card>
         </Grid>
