@@ -23,12 +23,11 @@ export default function LatestMovie(prop) {
   const fetchData = async () => {
     try {
       const response = await axios.get('&s=harry&potter');
-      await console.log(response.data.Search);
       await setWholeResponse(response.data.Search);
       await setLoading(false);
     } catch (error) {
-      await console.log(error);
       await setLoading(false)
+      await console.log(error);
     }
   };
 
@@ -53,7 +52,7 @@ export default function LatestMovie(prop) {
   const renderMovies = () => {
     return wholeResponse.map((item, index) => {
       return (
-        <Grid item xs={12} sm={6} md={3} key={index}>
+        <Grid item xs={12} sm={12} md={3} lg={2} key={index}>
           <Card className={classes.root}>
             <CardActionArea className={classes.mousePointer}>
               <CardMedia

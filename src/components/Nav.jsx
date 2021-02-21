@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 export default function Nav() {
   const [searchVal, setSearchVal] = useState('');
   const [dataAvailable, setDataAvailable] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if ((searchVal !== null) & (searchVal !== '')) {
@@ -16,7 +18,9 @@ export default function Nav() {
 
   const searchMovie = (value) => {
     setSearchVal('');
-  }
+    let conValue = value.replace(' ', '&');
+    history.push(`/search/${conValue}`);
+  };
 
   return (
     <nav>

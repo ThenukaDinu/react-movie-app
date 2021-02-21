@@ -30,8 +30,8 @@ export default function Movie({ match }) {
       await setActors(res.data.Actors.split(","));
       await setLoading(false);
     } catch (error) {
-      console.log(error);
       await setLoading(false);
+      await console.log(error);
     }
   };
 
