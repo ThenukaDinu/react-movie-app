@@ -14,6 +14,7 @@ import {
   Grid,
   CircularProgress,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export default function LatestMovie(prop) {
   const [wholeResponse, setWholeResponse] = useState([]);
@@ -21,12 +22,13 @@ export default function LatestMovie(prop) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('&s=indiana');
+      const response = await axios.get('&s=harry&potter');
       await console.log(response.data.Search);
       await setWholeResponse(response.data.Search);
       await setLoading(false);
     } catch (error) {
       await console.log(error);
+      await setLoading(false)
     }
   };
 
@@ -41,6 +43,9 @@ export default function LatestMovie(prop) {
       'margin-top': 50,
       'margin-left': 50,
     },
+    mousePointer: {
+      cursor: 'pointer !important',
+    },
   }));
 
   const classes = useStyles();
@@ -50,7 +55,7 @@ export default function LatestMovie(prop) {
       return (
         <Grid item xs={12} sm={6} md={3} xl={2} key={index}>
           <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea className={classes.mousePointer}>
               <CardMedia
                 component='img'
                 alt='Contemplative Reptile'
@@ -62,7 +67,11 @@ export default function LatestMovie(prop) {
                 <Typography gutterBottom variant='h6' component='h6'>
                   {item.Title}
                 </Typography>
-                <Typography variant='body2' color='textSecondary' component='p'>
+                <Typography
+                  variant='body2'
+                  color='textSecondary'
+                  component='div'
+                >
                   <h3>Year: {item.Year}</h3>
                   <h3>Type: {item.Type}</h3>
                   <h3>IMDB: {item.imdbID}</h3>
@@ -70,13 +79,11 @@ export default function LatestMovie(prop) {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button
-                size='small'
-                color='primary'
-                onClick={() => singleMovie()}
-              >
-                View
-              </Button>
+              <Link to={`/movie/${item.imdbID}`} style={{'textDecoration': 'none'}}>
+                <Button size='small' color='primary'>
+                  View
+                </Button>
+              </Link>
               <Button
                 size='small'
                 color='primary'
@@ -89,10 +96,6 @@ export default function LatestMovie(prop) {
         </Grid>
       );
     });
-  };
-
-  const singleMovie = (id) => {
-    this.props.history.push('/movie/' + id);
   };
 
   const redirectToIMDB = (id) => {
@@ -117,6 +120,7 @@ export default function LatestMovie(prop) {
 
   return (
     <Container>
+      <br/><br/>
       <Grid
         container
         spacing={3}
