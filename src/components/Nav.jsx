@@ -22,6 +22,12 @@ export default function Nav() {
     history.push(`/search/${conValue}`);
   };
 
+  const _handleKeyDown = (e) => {
+    if (e.key === 'Enter' && dataAvailable) {
+      searchMovie(searchVal);
+    }
+  };
+
   return (
     <nav>
       <h2 className='nav-heading'>
@@ -30,21 +36,27 @@ export default function Nav() {
         </Link>
       </h2>
       <ul className='nav-items'>
-        <input
-          type='text'
-          className='nav-input'
-          placeholder='Enter movie name'
-          value={searchVal}
-          onChange={(event) => setSearchVal(event.target.value)}
-        />
-        <Button
-          className='nav-btn'
-          variant='contained'
-          disabled={!dataAvailable}
-          onClick={() => searchMovie(searchVal)}
-        >
-          Search
-        </Button>
+        <li>
+          <input
+            type='text'
+            className='nav-input'
+            placeholder='Enter movie name'
+            value={searchVal}
+            onChange={(event) => setSearchVal(event.target.value)}
+            onKeyDown={(e) => _handleKeyDown(e)}
+          />
+        </li>
+        
+        <li>
+          <Button
+            className='nav-btn'
+            variant='contained'
+            disabled={!dataAvailable}
+            onClick={() => searchMovie(searchVal)}
+          >
+            Search
+          </Button>
+        </li>
       </ul>
     </nav>
   );

@@ -1,6 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 nav {
   display: flex;
   background-color: rgb(192, 204, 207);
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .nav-heading {
@@ -8,17 +16,27 @@ nav {
 }
 
 .nav-items {
-  margin-left: auto;
   display: flex;
+  margin-left: auto;
+  overflow-x: hidden;
+  list-style: none;
+  flex-wrap: wrap;
 }
 
 .nav-items .nav-input {
   border-radius: 5px;
   border: 0;
-  padding: 0 0 0 6px;
+  padding: 10px 10px 10px 6px;
 }
 
 .nav-items .nav-btn {
   margin-right: 50px;
   margin-left: 15px;
 }
+
+@media only screen and (max-width: 465) {
+  .nav-items:nth-child(1) {
+    flex-basis: 100px;
+  }
+}
+
